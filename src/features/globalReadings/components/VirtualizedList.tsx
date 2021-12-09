@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React from "react";
 import {
   List,
@@ -55,7 +56,7 @@ const VirtualizedList: React.FunctionComponent<VirtualizedListProps> = ({
   };
 
   return (
-    <div className="col col--6-lg col--4-md">
+    <Grid item xs={12} sm={12} md={12} lg={6} sx={{ order: { lg: 2, md: 3 } }}>
       {readings && readings.length > 0 && (
         <WindowScroller>
           {({ height, isScrolling, onChildScroll, scrollTop }) => (
@@ -79,7 +80,7 @@ const VirtualizedList: React.FunctionComponent<VirtualizedListProps> = ({
           )}
         </WindowScroller>
       )}
-    </div>
+    </Grid>
   );
 };
 

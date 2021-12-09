@@ -1,5 +1,6 @@
+import { ListItem } from "@mui/material";
 import React from "react";
-import { Tag } from "../types";
+// import { Tag } from "../types";
 import TagItem from "./TagItem";
 
 type TagsListProps = {
@@ -15,7 +16,11 @@ const TagsList: React.FC<TagsListProps> = ({ tags, isHidden }) => {
     });
   }
 
-  return <div className={`menu__list ${isHidden}`}>{tagsList}</div>;
+  return (
+    <ListItem sx={{ display: `${isHidden === "hidden" ? "none" : "block"}` }}>
+      {tagsList}
+    </ListItem>
+  );
 };
 
 export default TagsList;

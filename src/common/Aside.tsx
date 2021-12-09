@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React from "react";
 
 interface AsideProps {
@@ -5,7 +6,11 @@ interface AsideProps {
 }
 
 const Aside: React.FunctionComponent<AsideProps> = ({ children }) => {
-  return <aside className="col col--3-lg col--4-md">{children}</aside>;
+  return (
+    <Grid xs={12} sm={12} item md={12} lg={3} sx={{ order: { lg: 1, md: 2 } }}>
+      {children}
+    </Grid>
+  );
 };
 
 export default Aside;

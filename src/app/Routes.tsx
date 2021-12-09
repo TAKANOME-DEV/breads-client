@@ -15,6 +15,7 @@ import SignUpCard from "../common/SignUpCard";
 import Aside from "../common/Aside";
 import LeftAside from "../common/LeftAside";
 import { RootState } from "../features/rootReducer";
+import { Container } from "@mui/material";
 
 const AuthForm = lazy(() => import("../features/auth/components/AuthForm"));
 const EmailForm = lazy(() => import("../features/auth/components/EmailForm"));
@@ -44,7 +45,12 @@ export interface ResetParams {
 
 const Routes: React.FC<RouteProps> = ({ alerts, currentUser }) => {
   return (
-    <div className="container-sm container-md container py-2">
+    <Container
+      sx={{
+        marginTop: "32px",
+        maxWidth: { lg: "1140px", md: "600px", sm: "400px" },
+      }}
+    >
       <Suspense fallback={<div></div>}>
         <Switch>
           <Route
@@ -361,7 +367,7 @@ const Routes: React.FC<RouteProps> = ({ alerts, currentUser }) => {
           />
         </Switch>
       </Suspense>
-    </div>
+    </Container>
   );
 };
 

@@ -21,11 +21,7 @@ const ListCard: React.FunctionComponent<ListCardProps> = ({
     <div className="card-demo-md">
       <div className="card">
         <div className="card__header">
-          <UserImage
-            image={users[id].image}
-            username={users[id].username}
-            imageSize="xl"
-          >
+          <UserImage image={users[id].image} username={users[id].username}>
             <div className="avatar__intro">
               <Link to={`/${id}`}>
                 <h4 className="avatar__name">{users[id].username}</h4>

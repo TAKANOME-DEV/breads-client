@@ -3,6 +3,7 @@ import { connect, ConnectedProps } from "react-redux";
 import TagsList from "./TagsList";
 import { getMostRecentTagIds, getTopTagsIds } from "../selectors";
 import { RootState } from "../../rootReducer";
+import { Button, ButtonGroup } from "@mui/material";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type TagsAsideState = {
@@ -14,6 +15,16 @@ type TagsAsideProps = PropsFromRedux & OwnProps;
 interface OwnProps {
   list: string;
 }
+
+type ButtonType =
+  | "primary"
+  | "inherit"
+  | "secondary"
+  | "success"
+  | "error"
+  | "info"
+  | "warning"
+  | undefined;
 
 class TagsAside extends Component<TagsAsideProps, TagsAsideState> {
   constructor(props: TagsAsideProps) {
@@ -36,27 +47,31 @@ class TagsAside extends Component<TagsAsideProps, TagsAsideState> {
 
     let visibleTags = activeTags === "new" ? mostRecentTags : topTags;
     let isHidden = activeTags === "" ? "hidden" : "";
-    let activeTop = activeTags === "top" ? "primary" : "secondary";
-    let activeNew = activeTags === "new" ? "primary" : "secondary";
+    let activeTop: ButtonType = activeTags === "top" ? "primary" : "inherit";
+    let activeNew: ButtonType = activeTags === "new" ? "primary" : "inherit";
 
     return (
       <>
-        <div className="button-group button-group--block">
-          <button
+        <ButtonGroup sx={{ width: "100%" }}>
+          <Button
             onClick={this.handleClick}
-            className={`button button--${activeTop}`}
+            variant="contained"
+            color={`${activeTop}`}
+            sx={{ fontWeight: "bold", width: "100%" }}
             name="top"
           >
             Top Tags
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={this.handleClick}
-            className={`button button--${activeNew}`}
+            variant="contained"
+            color={`${activeNew}`}
+            sx={{ fontWeight: "bold", width: "100%" }}
             name="new"
           >
             New Tags
-          </button>
-        </div>
+          </Button>
+        </ButtonGroup>
         <TagsList tags={visibleTags} isHidden={isHidden} />
       </>
     );

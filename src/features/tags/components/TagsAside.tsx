@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import TagsList from "./TagsList";
 import { getMostRecentTagIds, getTopTagsIds } from "../selectors";
+import { List, Tab, Tabs } from "@mui/material";
 import { RootState } from "../../rootReducer";
-import { Button, ButtonGroup } from "@mui/material";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type TagsAsideState = {
   activeTags: string;
@@ -34,8 +33,7 @@ class TagsAside extends Component<TagsAsideProps, TagsAsideState> {
     };
   }
 
-  handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    let name = e.currentTarget.name;
+  handleClick = (e: React.SyntheticEvent, name: string) => {
     this.setState((prevState) => ({
       activeTags: prevState.activeTags !== name ? name : "",
     }));
@@ -47,32 +45,36 @@ class TagsAside extends Component<TagsAsideProps, TagsAsideState> {
 
     let visibleTags = activeTags === "new" ? mostRecentTags : topTags;
     let isHidden = activeTags === "" ? "hidden" : "";
-    let activeTop: ButtonType = activeTags === "top" ? "primary" : "inherit";
-    let activeNew: ButtonType = activeTags === "new" ? "primary" : "inherit";
 
     return (
       <>
-        <ButtonGroup sx={{ width: "100%" }}>
-          <Button
-            onClick={this.handleClick}
-            variant="contained"
-            color={`${activeTop}`}
-            sx={{ fontWeight: "bold", width: "100%" }}
-            name="top"
-          >
-            Top Tags
-          </Button>
-          <Button
-            onClick={this.handleClick}
-            variant="contained"
-            color={`${activeNew}`}
-            sx={{ fontWeight: "bold", width: "100%" }}
-            name="new"
-          >
-            New Tags
-          </Button>
-        </ButtonGroup>
-        <TagsList tags={visibleTags} isHidden={isHidden} />
+        <Tabs
+          value={activeTags}
+          onChange={this.handleClick}
+          textColor="primary"
+          indicatorColor="primary"
+          style={{
+            width: "100%",
+          }}
+        >
+          <Tab
+            label="Top"
+            value="top"
+            style={{
+              width: "50%",
+            }}
+          />
+          <Tab
+            label="New"
+            value="new"
+            style={{
+              width: "50%",
+            }}
+          />
+        </Tabs>
+        <List>
+          <TagsList tags={visibleTags} isHidden={isHidden} />
+        </List>
       </>
     );
   }
